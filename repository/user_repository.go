@@ -25,6 +25,24 @@ func (r *UserRepository) CreateUser(user *models.User) error {
 	return err
 }
 
+func (r *UserRepository) GetUsers() ([]models.User, error) {
+	var users []models.User
+	rows, err := r.db.Query("SELECT * FROM users")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var user models.User
+		err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.PasswordHash, &user.UserType, &user.CreatedAt, &user.UpdatedAt)
+		if err != nil {
+			return nil, err
+		}
+		users = append(users, user)
+	}
+	return users, nil
+}
+
 func (r *UserRepository) GetUserByEmail(email string) (*models.User, error) {
 	var user models.User
 	err := r.db.QueryRow("SELECT * FROM users WHERE email = $1", email).Scan(&user.ID, &user.Name, &user.Email, &user.PasswordHash, &user.UserType, &user.CreatedAt, &user.UpdatedAt)
