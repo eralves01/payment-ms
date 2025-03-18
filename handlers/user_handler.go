@@ -73,3 +73,16 @@ func GetUserByEmail(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(user)
 }
+
+func GetUsersByFilters(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
+
+	service := services.NewUserServices()
+	users, err := service.GetUsersByFilters(query)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(users)
+}
