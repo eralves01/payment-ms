@@ -2,7 +2,8 @@ package processors
 
 import (
 	"fmt"
-	"payment-ms/models"
+
+	"github.com/eralves01/payment-ms/models"
 )
 
 type DeditCardProcessor struct {

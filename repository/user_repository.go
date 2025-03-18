@@ -2,7 +2,8 @@ package repository
 
 import (
 	"database/sql"
-	"payment-ms/models"
+
+	"github.com/eralves01/payment-ms/models"
 )
 
 type UserRepositoryInterface interface {

@@ -1,4 +1,4 @@
-module payment-ms
+module github.com/eralves01/payment-ms
 
 go 1.24.1
 

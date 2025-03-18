@@ -1,10 +1,10 @@
 package services
 
 import (
-	"payment-ms/database"
-	"payment-ms/models"
-	"payment-ms/processors"
-	"payment-ms/repository"
+	"github.com/eralves01/payment-ms/database"
+	"github.com/eralves01/payment-ms/models"
+	"github.com/eralves01/payment-ms/processors"
+	"github.com/eralves01/payment-ms/repository"
 )
 
 type PaymentService struct {

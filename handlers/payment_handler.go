@@ -3,10 +3,11 @@ package handlers
 import (
 	"fmt"
 	"net/http"
-	"payment-ms/processors"
-	"payment-ms/services"
 
-	"payment-ms/models"
+	"github.com/eralves01/payment-ms/processors"
+	"github.com/eralves01/payment-ms/services"
+
+	"github.com/eralves01/payment-ms/models"
 
 	"github.com/gorilla/mux"
 )

@@ -2,7 +2,8 @@ package routes
 
 import (
 	"net/http"
-	"payment-ms/handlers"
+
+	"github.com/eralves01/payment-ms/handlers"
 
 	"github.com/gorilla/mux"
 )

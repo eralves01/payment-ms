@@ -3,7 +3,8 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-	"payment-ms/models"
+
+	"github.com/eralves01/payment-ms/models"
 )
 
 type PaymentRepository struct {

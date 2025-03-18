@@ -1,7 +1,7 @@
 package processors
 
 import (
-	"payment-ms/models"
+	"github.com/eralves01/payment-ms/models"
 )
 
 type PaymentProcessor interface {
