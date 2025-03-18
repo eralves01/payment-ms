@@ -22,6 +22,7 @@ func SetupRoutes() *mux.Router {
 	// Rotas de usuários
 	users := api.PathPrefix("/users").Subrouter()
 	users.HandleFunc("", handlers.CreateUser).Methods(http.MethodPost)
+	users.HandleFunc("", handlers.GetUsers).Methods(http.MethodGet)
 	users.HandleFunc("/{id}", handlers.GetUserByID).Methods(http.MethodGet)
 	users.HandleFunc("/email/{email}", handlers.GetUserByEmail).Methods(http.MethodGet)
 

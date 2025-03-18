@@ -21,6 +21,11 @@ func (s *UserServices) CreateUser(user *models.User) error {
 	return nil
 }
 
+func (s *UserServices) GetUsers() ([]models.User, error) {
+	repository := getRepository()
+	return repository.GetUsers()
+}
+
 func (s *UserServices) GetUserByEmail(email string) (*models.User, error) {
 	repository := getRepository()
 	return repository.GetUserByEmail(email)
