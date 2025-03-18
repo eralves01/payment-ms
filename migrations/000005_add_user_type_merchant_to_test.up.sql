@@ -1,0 +1,1 @@
+INSERT INTO users (name, email, password_hash, user_type) VALUES ('Maria Mercantil', 'maria.mercantil@example.com', 'senha456', 'merchant');
