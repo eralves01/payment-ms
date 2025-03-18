@@ -1,9 +1,9 @@
 package services
 
 import (
-	"payment-ms/database"
-	"payment-ms/models"
-	"payment-ms/repository"
+	"github.com/eralves01/payment-ms/database"
+	"github.com/eralves01/payment-ms/models"
+	"github.com/eralves01/payment-ms/repository"
 )
 
 type UserServices struct{}

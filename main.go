@@ -5,9 +5,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"payment-ms/configs"
-	"payment-ms/database"
-	"payment-ms/routes"
+
+	"github.com/eralves01/payment-ms/configs"
+	"github.com/eralves01/payment-ms/database"
+	"github.com/eralves01/payment-ms/routes"
 )
 
 func main() {

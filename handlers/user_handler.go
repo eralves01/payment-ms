@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"payment-ms/models"
-	"payment-ms/services"
 	"time"
+
+	"github.com/eralves01/payment-ms/models"
+	"github.com/eralves01/payment-ms/services"
 
 	"github.com/gorilla/mux"
 )
