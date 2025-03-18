@@ -11,20 +11,19 @@ import (
 func SetupRoutes() *mux.Router {
 	router := mux.NewRouter()
 
-	// Criando um subrouter para a versão da API
 	api := router.PathPrefix("/api/v1").Subrouter()
+	api.HandleFunc("/users/filters", handlers.GetUsersByFilters).Methods(http.MethodGet)
 
-	// Rotas de pagamentos
 	payments := api.PathPrefix("/payments").Subrouter()
 	payments.HandleFunc("", handlers.ProcessPayment).Methods(http.MethodPost)
 	payments.HandleFunc("/{id}", handlers.GetPayment).Methods(http.MethodGet)
 
-	// Rotas de usuários
 	users := api.PathPrefix("/users").Subrouter()
 	users.HandleFunc("", handlers.CreateUser).Methods(http.MethodPost)
 	users.HandleFunc("", handlers.GetUsers).Methods(http.MethodGet)
 	users.HandleFunc("/{id}", handlers.GetUserByID).Methods(http.MethodGet)
 	users.HandleFunc("/email/{email}", handlers.GetUserByEmail).Methods(http.MethodGet)
+	users.HandleFunc("/filters", handlers.GetUsersByFilters).Methods(http.MethodGet)
 
 	return router
 }

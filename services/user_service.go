@@ -36,6 +36,11 @@ func (s *UserServices) GetUserByID(id string) (*models.User, error) {
 	return repository.GetUserByID(id)
 }
 
+func (s *UserServices) GetUsersByFilters(query map[string][]string) ([]models.User, error) {
+	repository := getRepository()
+	return repository.GetUsersByFilters(query)
+}
+
 func getRepository() *repository.UserRepository {
 	db := database.GetInstance()
 	return repository.NewUserRepository(db)
