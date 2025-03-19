@@ -2,9 +2,10 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	"os"
 	"sync"
+
+	"github.com/eralves01/payment-ms/configs"
 
 	_ "github.com/lib/pq"
 )
@@ -15,8 +16,9 @@ var instance *sql.DB
 var once sync.Once
 
 func GetInstance() *sql.DB {
+	log := configs.NewLogger("payment-ms")
 	once.Do(func() {
-		fmt.Println("Connecting to database...")
+		log.Info("Connecting to database...")
 		var err error
 		instance, err = Connect()
 		if err != nil {
