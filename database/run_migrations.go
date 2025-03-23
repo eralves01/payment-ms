@@ -1,7 +1,7 @@
 package database
 
 import (
-	"log"
+	"github.com/eralves01/payment-ms/configs"
 
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
@@ -9,6 +9,7 @@ import (
 )
 
 func RunMigrations() {
+	log := configs.NewLogger("payment-ms")
 	databaseURL := createDatabaseURL()
 	m, err := migrate.New(
 		"file://migrations",
@@ -22,5 +23,5 @@ func RunMigrations() {
 		log.Fatal(err)
 	}
 
-	log.Println("Migrações aplicadas com sucesso!")
+	log.Info("Migrações aplicadas com sucesso!")
 }
