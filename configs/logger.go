@@ -11,6 +11,7 @@ type Logger struct {
 	info   *log.Logger
 	warn   *log.Logger
 	err    *log.Logger
+	fatal  *log.Logger
 	writer io.Writer
 }
 
@@ -23,6 +24,7 @@ func NewLogger(p string) *Logger {
 		info:   log.New(writer, "INFO: ", logger.Flags()),
 		warn:   log.New(writer, "WARNING: ", logger.Flags()),
 		err:    log.New(writer, "ERROR: ", logger.Flags()),
+		fatal:  log.New(writer, "FATAL: ", logger.Flags()),
 		writer: writer,
 	}
 }
@@ -43,6 +45,11 @@ func (l *Logger) Error(v ...interface{}) {
 	l.err.Println(v...)
 }
 
+func (l *Logger) Fatal(v ...interface{}) {
+	l.fatal.Println(v...)
+	os.Exit(1)
+}
+
 func (l *Logger) Debugf(format string, v ...interface{}) {
 	l.debug.Printf(format, v...)
 }
@@ -57,4 +64,9 @@ func (l *Logger) Warnf(format string, v ...interface{}) {
 
 func (l *Logger) Errorf(format string, v ...interface{}) {
 	l.err.Printf(format, v...)
+}
+
+func (l *Logger) Fatalf(format string, v ...interface{}) {
+	l.fatal.Printf(format, v...)
+	os.Exit(1)
 }
