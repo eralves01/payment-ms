@@ -23,6 +23,6 @@ func main() {
 		port = "8080"
 	}
 
-	log.Infof("Servidor rodando na porta %s...\n", port)
-	log.Error(http.ListenAndServe(fmt.Sprintf(":%s", port), router))
+	log.Infof("Server running on port %s...\n", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), router))
 }

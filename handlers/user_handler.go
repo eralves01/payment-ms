@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -60,8 +59,6 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 func GetUserByEmail(w http.ResponseWriter, r *http.Request) {
 	var vars = mux.Vars(r)
 	email := vars["email"]
-
-	fmt.Println("Email: " + email)
 
 	service := services.NewUserServices()
 	user, err := service.GetUserByEmail(email)
