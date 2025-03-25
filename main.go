@@ -14,7 +14,6 @@ func main() {
 	log := configs.NewLogger("payment-ms")
 	configs.LoadConfig()
 	database.RunMigrations()
-	database.GetInstance()
 
 	router := routes.SetupRoutes()
 
