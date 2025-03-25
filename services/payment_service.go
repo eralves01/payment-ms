@@ -16,7 +16,7 @@ func NewPaymentService(processor *processors.PaymentProcessor) *PaymentService {
 }
 
 func (s *PaymentService) ProcessPayment(payment *models.Payment) error {
-	db := database.GetInstance()
+	db := database.NewDatadase().GetInstance()
 	repo := repository.NewPaymentRepository(db)
 	err := repo.CreatePayment(payment)
 	if err != nil {

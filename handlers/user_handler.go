@@ -11,7 +11,15 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func CreateUser(w http.ResponseWriter, r *http.Request) {
+type UserHandler struct {
+	service *services.UserServices
+}
+
+func NewUserHandler(service *services.UserServices) *UserHandler {
+	return &UserHandler{service: service}
+}
+
+func (h *UserHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	var user models.User
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
@@ -21,8 +29,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	user.CreatedAt = time.Now()
 	user.UpdatedAt = nil
 
-	service := services.NewUserServices()
-	result := service.CreateUser(&user)
+	result := h.service.CreateUser(&user)
 	if result != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -30,9 +37,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-func GetUsers(w http.ResponseWriter, r *http.Request) {
-	service := services.NewUserServices()
-	users, err := service.GetUsers()
+func (h *UserHandler) GetUsers(w http.ResponseWriter, r *http.Request) {
+	users, err := h.service.GetUsers()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -41,12 +47,11 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
 
-func GetUserByID(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) GetUserByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
-	service := services.NewUserServices()
-	user, err := service.GetUserByID(id)
+	user, err := h.service.GetUserByID(id)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -56,12 +61,11 @@ func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
-func GetUserByEmail(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) GetUserByEmail(w http.ResponseWriter, r *http.Request) {
 	var vars = mux.Vars(r)
 	email := vars["email"]
 
-	service := services.NewUserServices()
-	user, err := service.GetUserByEmail(email)
+	user, err := h.service.GetUserByEmail(email)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
@@ -71,11 +75,10 @@ func GetUserByEmail(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(user)
 }
 
-func GetUsersByFilters(w http.ResponseWriter, r *http.Request) {
+func (h *UserHandler) GetUsersByFilters(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 
-	service := services.NewUserServices()
-	users, err := service.GetUsersByFilters(query)
+	users, err := h.service.GetUsersByFilters(query)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return

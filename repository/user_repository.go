@@ -8,12 +8,6 @@ import (
 	"github.com/eralves01/payment-ms/models"
 )
 
-type UserRepositoryInterface interface {
-	CreateUser(user *models.User) error
-	GetUserByEmail(email string) (*models.User, error)
-	GetUserByID(id string) (*models.User, error)
-}
-
 type UserRepository struct {
 	db *sql.DB
 }
