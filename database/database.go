@@ -10,17 +10,21 @@ import (
 	_ "github.com/lib/pq"
 )
 
-type Database struct{}
-
 var instance *sql.DB
 var once sync.Once
 
-func GetInstance() *sql.DB {
+type Database struct{}
+
+func NewDatadase() *Database {
+	return &Database{}
+}
+
+func (db *Database) GetInstance() *sql.DB {
 	log := configs.NewLogger("payment-ms")
 	once.Do(func() {
 		log.Info("Connecting to database...")
 		var err error
-		instance, err = Connect()
+		instance, err = connect()
 		if err != nil {
 			panic(err)
 		}
@@ -28,7 +32,7 @@ func GetInstance() *sql.DB {
 	return instance
 }
 
-func Connect() (*sql.DB, error) {
+func connect() (*sql.DB, error) {
 	return sql.Open("postgres", createDatabaseURL())
 }
 
